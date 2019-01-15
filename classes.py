@@ -6,12 +6,14 @@ from functions import *
 
 class Game():
     def __init__(self):
-        self.step_count = 0
-        self.object_list = []
-        self.fps_max = 60
         self.display_size = (480, 270)
         self.application_surface = pygame.display.set_mode(self.display_size)
         self.assets = get_assets(os.path.join(os.path.dirname(os.path.realpath(__file__)), "assets"))
+        self.fps_max = 60
+        self.fps_real = None
+        self.step_count = 0
+        self.font = pygame.font.SysFont("monospace", 12)
+        self.object_list = []
 
     def step(self):
         time_begin = time.time()
@@ -28,14 +30,21 @@ class Game():
         for i in self.object_list:
             i.step()
 
-        pygame.display.update()
+        self.draw_text("FPS_real: " + str(self.fps_real), 0, 0)
 
-        time.sleep(max(time_begin + 1/self.fps_max - time.time(), 0))
+        pygame.display.update()
 
         self.step_count += 1
 
+        t = time.time()
+        time.sleep(max(time_begin + 1/self.fps_max - t, 0))
+        self.fps_real = int((t - time_begin)**-1)
+
     def rect_from_sprite(self, instance, sprite_index):
         return self.application_surface.blit(self.assets[sprite_index][0], (instance.rect.x, instance.rect.y))
+
+    def draw_text(self, string, x, y):
+        self.application_surface.blit(self.font.render(string, False, (255, 255, 255)), (x, y))
 
 class Object():
     def __init__(self, x, y):
@@ -108,7 +117,6 @@ class Player(Physical):
 
     def step(self):
         super().step()
-
         if key[pygame.K_LEFT]:
             self.speed_x -= self.acceleration
         if key[pygame.K_RIGHT]:
