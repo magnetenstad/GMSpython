@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import pygame
-import os
-import time
-from PIL import Image, ImageSequence
 
 from functions import *
 from classes import *
@@ -12,8 +9,10 @@ pygame.init()
 pygame.display.init()
 pygame.mixer.init()
 
-game.assets = get_assets(game.path_assets)
 player = Player(100, 100)
+
+for i in range(10):
+    Wall(48 + i*16, 132)
 
 while True:
     game.step()
