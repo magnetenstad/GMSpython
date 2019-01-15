@@ -58,3 +58,5 @@ class Player(Object):
         super().__init__(x, y)
         self.sprite_index = "player.png"
         self.mask_index = game.application_surface.blit(game.assets[self.sprite_index][self.image_index], (self.rect.x, self.rect.y))
+
+game = Game()

@@ -12,7 +12,6 @@ pygame.init()
 pygame.display.init()
 pygame.mixer.init()
 
-game = Game()
 game.assets = get_assets(game.path_assets)
 player = Player(100, 100)
 
