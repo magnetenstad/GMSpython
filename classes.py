@@ -38,7 +38,7 @@ class Game():
 
         t = time.time()
         time.sleep(max(time_begin + 1/self.fps_max - t, 0))
-        self.fps_real = int((t - time_begin)**-1)
+        self.fps_real = int((max(t - time_begin, 10**-10))**-1)
 
     def rect_from_sprite(self, instance, sprite_index):
         return self.application_surface.blit(self.assets[sprite_index][0], (instance.rect.x, instance.rect.y))
@@ -65,6 +65,9 @@ class Object():
 
     def step(self):
         self.draw()
+
+    def destroy(self):
+        game.object_list.remove(self)
 
 class Physical(Object):
     def __init__(self, x, y):
