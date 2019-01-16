@@ -18,7 +18,7 @@ class Game():
     def step(self):
         time_begin = time.time()
 
-        game.application_surface.fill((0, 0, 0))
+        self.application_surface.fill((0, 0, 0))
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -49,7 +49,6 @@ class Game():
 class Object():
     def __init__(self, x, y):
         self.sprite_index = None
-        self.rect = None
         self.image_index = 0
         self.image_speed = 0
         self.depth = 0
