@@ -44,7 +44,13 @@ class Game():
         return self.application_surface.blit(self.assets[sprite_index][0], (instance.rect.x, instance.rect.y))
 
     def draw_text(self, string, x, y):
-        self.application_surface.blit(self.font.render(string, False, (255, 255, 255)), (x, y))
+        self.application_surface.blit(self.font.render(string, False, (255, 255, 255)), (x - self.camera.x, y - self.camera.y))
+
+    def draw_sprite(self, sprite_index, image_index, x, y):
+        self.application_surface.blit(self.assets[sprite_index][int(image_index)], (x - self.camera.x, y - self.camera.y))
+
+    def draw_instance(self, instance):
+        return self.draw_sprite(instance.sprite_index, instance.image_index, instance.rect.x, instance.rect.y)
 
 class Object():
     def __init__(self, x, y):
@@ -60,13 +66,29 @@ class Object():
         if self.sprite_index != None:
             self.image_index += self.image_speed
             self.image_index *= self.image_index < len(game.assets[self.sprite_index])
-            game.application_surface.blit(game.assets[self.sprite_index][int(self.image_index)], (self.rect.x, self.rect.y))
+            game.draw_instance(self)
 
     def step(self):
         self.draw()
 
     def destroy(self):
         game.object_list.remove(self)
+
+class Camera(Object):
+    def __init__(self, display_size, x, y):
+        super().__init__(x, y)
+        self.x = 0
+        self.y = 0
+        self.target_x = self.x
+        self.target_y = self.y
+        #self.width = display_size[0]
+        #self.height = display_size[1]
+
+    def step(self):
+        self.target_x = player.rect.x #- self.width/2
+        self.target_y = player.rect.y #- self.height/2
+        self.x += (self.target_x - self.x) / 10
+        self.y += (self.target_y - self.y) / 10
 
 class Physical(Object):
     def __init__(self, x, y):
@@ -139,3 +161,5 @@ class Wall(Solid):
         self.rect = game.rect_from_sprite(self, "wall.png")
 
 game = Game()
+player = Player(100, 100)
+game.camera = Camera(game.display_size, 0, 0)
