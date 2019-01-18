@@ -1,6 +1,7 @@
 import pygame
 import os
 import time
+import random
 
 from functions import *
 
@@ -44,10 +45,10 @@ class Game():
         return self.application_surface.blit(self.assets[sprite_index][0], (instance.rect.x, instance.rect.y))
 
     def draw_text(self, string, x, y):
-        self.application_surface.blit(self.font.render(string, False, (255, 255, 255)), (x - self.camera.x, y - self.camera.y))
+        self.application_surface.blit(self.font.render(string, False, (255, 255, 255)), (x - camera.x, y - camera.y))
 
     def draw_sprite(self, sprite_index, image_index, x, y):
-        self.application_surface.blit(self.assets[sprite_index][int(image_index)], (x - self.camera.x, y - self.camera.y))
+        self.application_surface.blit(self.assets[sprite_index][int(image_index)], (x - camera.x, y - camera.y))
 
     def draw_instance(self, instance):
         return self.draw_sprite(instance.sprite_index, instance.image_index, instance.rect.x, instance.rect.y)
@@ -73,6 +74,7 @@ class Object():
 
     def destroy(self):
         game.object_list.remove(self)
+        del self
 
 class Camera(Object):
     def __init__(self, display_size, x, y):
@@ -81,12 +83,12 @@ class Camera(Object):
         self.y = 0
         self.target_x = self.x
         self.target_y = self.y
-        #self.width = display_size[0]
-        #self.height = display_size[1]
+        self.width = display_size[0]
+        self.height = display_size[1]
 
     def step(self):
-        self.target_x = player.rect.x #- self.width/2
-        self.target_y = player.rect.y #- self.height/2
+        self.target_x = player.rect.x - self.width/2
+        self.target_y = player.rect.y - self.height/2
         self.x += (self.target_x - self.x) / 10
         self.y += (self.target_y - self.y) / 10
 
@@ -147,6 +149,8 @@ class Player(Physical):
             self.speed_x += self.acceleration
         if key[pygame.K_UP]:
             self.speed_y = self.speed_jump
+        if key[pygame.K_DOWN]:
+            Particle(self.rect.x, self.rect.y, 360, random.randint(-10, 10), random.randint(-10, 10))
 
 class Solid(Physical):
     def __init__(self, x, y):
@@ -160,6 +164,17 @@ class Wall(Solid):
         self.sprite_index = "wall.png"
         self.rect = game.rect_from_sprite(self, "wall.png")
 
+class Particle(Physical):
+    def __init__(self, x, y, duration, speed_x, speed_y):
+        super().__init__(x, y)
+        self.duration = duration
+        self.step_created = game.step_count
+        self.sprite_index = "wall.png"
+    def step(self):
+        super().step()
+        if game.step_count >= self.step_created + self.duration:
+            self.destroy()
+
 game = Game()
 player = Player(100, 100)
-game.camera = Camera(game.display_size, 0, 0)
+camera = Camera(game.display_size, 0, 0)
