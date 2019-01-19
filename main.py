@@ -1,13 +1,21 @@
 # -*- coding: utf-8 -*-
+from lib.classes.wall import Wall
+from lib.game import game
 
-import pygame
-pygame.init()
+from player import Player
 
-#from functions import *
-from classes import *
 
-for i in range(10):
-    Wall(48 + i*16, 132)
+def main():
+    game.init()
+    game.camera.follow('player')
 
-while True:
-    game.step()
+    Player(100, 100).add_tag('player')
+
+    for i in range(10):
+        Wall(48 + i * 16, 132)
+
+    game.run()
+
+
+if __name__ == '__main__':
+    main()
