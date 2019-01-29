@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from lib.classes.wall import Wall
 from lib.game import game
-from player import Player
+from src.wall import Wall
+from src.player import Player
 
 
 def main():
