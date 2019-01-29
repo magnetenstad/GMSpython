@@ -22,4 +22,4 @@ class Player(Physical):
         if game.key[pygame.K_UP]:
             self.speed_y = self.speed_jump
         if game.key[pygame.K_DOWN]:
-            Particle(self.rect.x, self.rect.y, 360, random.randint(-10, 10), random.randint(-10, 10))
+            Particle(self.rect.x, self.rect.y, 600, random.randint(-10, 10), random.randint(-10, 10))

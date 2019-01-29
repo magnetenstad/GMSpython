@@ -13,6 +13,7 @@ class Physical(Object):
         self.damping = 0.9
         self.gravity = 0.2
         self.bounce = 0
+        self.collidable = True
 
     def step(self):
         super().step()
@@ -25,24 +26,28 @@ class Physical(Object):
         if self.gravity == 0:
             self.speed_y *= self.damping
 
-        meeting = instance_place(self, self.rect.x + round(self.speed_x), self.rect.y,
-                                 instance_find(game.object_list, "solid", True))
-        if meeting:
-            if self.speed_x > 0:
-                self.rect.right = meeting.rect.left
-            elif self.speed_x < 0:
-                self.rect.left = meeting.rect.right
-            self.speed_x = 0
+        if self.collidable:
+            meeting = instance_place(self, self.rect.x + round(self.speed_x), self.rect.y,
+                                     instance_find(game.object_list, "solid", True))
+            if meeting:
+                if self.speed_x > 0:
+                    self.rect.right = meeting.rect.left
+                elif self.speed_x < 0:
+                    self.rect.left = meeting.rect.right
+                self.speed_x = 0
+            else:
+                self.rect.x += round(self.speed_x)
+
+            meeting = instance_place(self, self.rect.x, self.rect.y + round(self.speed_y),
+                                     instance_find(game.object_list, "solid", True))
+            if meeting:
+                if self.speed_y > 0:
+                    self.rect.bottom = meeting.rect.top
+                elif self.speed_y < 0:
+                    self.rect.top = meeting.rect.bottom
+                self.speed_y *= meeting.bounce
+            else:
+                self.rect.y += round(self.speed_y)
         else:
             self.rect.x += round(self.speed_x)
-
-        meeting = instance_place(self, self.rect.x, self.rect.y + round(self.speed_y),
-                                 instance_find(game.object_list, "solid", True))
-        if meeting:
-            if self.speed_y > 0:
-                self.rect.bottom = meeting.rect.top
-            elif self.speed_y < 0:
-                self.rect.top = meeting.rect.bottom
-            self.speed_y *= meeting.bounce
-        else:
             self.rect.y += round(self.speed_y)

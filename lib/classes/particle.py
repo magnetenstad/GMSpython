@@ -8,6 +8,9 @@ class Particle(Physical):
         self.duration = duration
         self.step_created = game.step_count
         self.sprite_index = "wall.png"
+        self.speed_x = speed_x
+        self.speed_y = speed_y
+        self.collidable = False
 
     def step(self):
         super().step()

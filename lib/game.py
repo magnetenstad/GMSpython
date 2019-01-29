@@ -4,7 +4,6 @@ import pygame
 
 from lib.assets import get_assets
 
-
 class Game():
     def __init__(self):
         pygame.init()
@@ -41,7 +40,8 @@ class Game():
         for i in self.object_list:
             i.step()
 
-        self.draw_text("FPS_real: " + str(self.fps_real), 0, 0)
+        self.draw_text_gui("FPS_real: " + str(self.fps_real), 0, 0)
+        self.draw_text_gui("Instance_number: " + str(len(self.object_list)), 0, 16)
 
         pygame.display.update()
 
@@ -63,7 +63,9 @@ class Game():
                                       (x - self.camera.x, y - self.camera.y))
 
     def draw_instance(self, instance):
-        return self.draw_sprite(instance.sprite_index, instance.image_index, instance.rect.x, instance.rect.y)
+        self.draw_sprite(instance.sprite_index, instance.image_index, instance.rect.x, instance.rect.y)
 
+    def draw_text_gui(self, string, x, y):
+        self.application_surface.blit(self.font.render(string, False, (255, 255, 255)), (x, y))
 
 game = Game()

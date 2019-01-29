@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
+
 from lib.classes.wall import Wall
 from lib.game import game
-
 from player import Player
-
 
 def main():
     game.init()
@@ -15,7 +14,6 @@ def main():
         Wall(48 + i * 16, 132)
 
     game.run()
-
 
 if __name__ == '__main__':
     main()
