@@ -12,7 +12,7 @@ class Physical(Object):
         self.damping = 0.9
         self.gravity = 0.2
         self.bounce = 0
-        self.collidable = True
+        self.collide = True
 
     def step(self):
         super().step()
@@ -25,7 +25,7 @@ class Physical(Object):
         if self.gravity == 0:
             self.speed_y *= self.damping
 
-        if self.collidable:
+        if self.collide:
             meeting = instance_place(self, self.rect.x + round(self.speed_x), self.rect.y, instance_find_tag("solid"))
             if meeting:
                 if self.speed_x > 0:

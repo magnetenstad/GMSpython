@@ -10,7 +10,7 @@ class Particle(Physical):
         self.sprite_index = "wall.png"
         self.speed_x = speed_x
         self.speed_y = speed_y
-        self.collidable = False
+        self.collide = False
 
     def step(self):
         super().step()
