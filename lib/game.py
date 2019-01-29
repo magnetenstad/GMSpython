@@ -17,6 +17,7 @@ class Game():
         self.object_list = []
         self.key = pygame.key.get_pressed()
         self.camera = None
+        self.solids = []
 
     def init(self):
         from lib.camera import Camera
@@ -36,6 +37,7 @@ class Game():
                 quit()
 
         self.key = pygame.key.get_pressed()
+        self.solids = [i for i in game.object_list if 'solid' in i.tags]
 
         for i in self.object_list:
             i.step()

@@ -11,7 +11,7 @@ def main():
     player = Player(100, 100)
     game.camera.follow(player)
 
-    for i in range(200):
+    for i in range(100):
         Wall(48 + i * 16, 132)
 
     game.run()
