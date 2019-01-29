@@ -10,7 +10,7 @@ def main():
 
     Player(100, 100).add_tag('player')
 
-    for i in range(10):
+    for i in range(200):
         Wall(48 + i * 16, 132)
 
     game.run()

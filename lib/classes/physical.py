@@ -1,6 +1,5 @@
 from lib.classes.object import Object
-from lib.functions import instance_place, instance_find
-from lib.game import game
+from lib.functions import instance_place, instance_find_tag
 
 
 class Physical(Object):
@@ -27,8 +26,7 @@ class Physical(Object):
             self.speed_y *= self.damping
 
         if self.collidable:
-            meeting = instance_place(self, self.rect.x + round(self.speed_x), self.rect.y,
-                                     instance_find(game.object_list, "solid", True))
+            meeting = instance_place(self, self.rect.x + round(self.speed_x), self.rect.y, instance_find_tag("solid"))
             if meeting:
                 if self.speed_x > 0:
                     self.rect.right = meeting.rect.left
@@ -38,8 +36,7 @@ class Physical(Object):
             else:
                 self.rect.x += round(self.speed_x)
 
-            meeting = instance_place(self, self.rect.x, self.rect.y + round(self.speed_y),
-                                     instance_find(game.object_list, "solid", True))
+            meeting = instance_place(self, self.rect.x, self.rect.y + round(self.speed_y), instance_find_tag("solid"))
             if meeting:
                 if self.speed_y > 0:
                     self.rect.bottom = meeting.rect.top
