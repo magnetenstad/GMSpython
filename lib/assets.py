@@ -22,15 +22,3 @@ def get_assets(assets_path):
         (os.path.basename(filename), load_asset(os.path.join(assets_path, filename)))
         for filename in sorted(os.listdir(assets_path))
     )
-
-
-def instance_place(instance, x, y, instance_list):
-    rect = instance.rect.move(x - instance.rect.x, y - instance.rect.y)
-    for i in instance_list:
-        if rect.colliderect(i.rect):
-            return i
-    return False
-
-
-def instance_find(list, var, val):
-    return [i for i in list if hasattr(i, var) and getattr(i, var) == val]
