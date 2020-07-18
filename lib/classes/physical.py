@@ -22,7 +22,9 @@ class Physical(Object):
 
         if abs(self.speed_x) < self.acceleration:
             self.speed_x = 0
+
         self.speed_x *= self.damping
+        
         if self.gravity == 0:
             self.speed_y *= self.damping
 

@@ -1,13 +1,14 @@
-# -*- coding: utf-8 -*-
 
 from lib.game import game
+from lib.functions import *
 from src.wall import Wall
 from src.player import Player
-
+from src.gui import Gui
 
 def main():
     game.init()
 
+    gui = Gui(0, 0)
     player = Player(100, 100)
     game.camera.follow(player)
 
@@ -15,7 +16,6 @@ def main():
         Wall(48 + i * 16, 132)
 
     game.run()
-
 
 if __name__ == '__main__':
     main()
