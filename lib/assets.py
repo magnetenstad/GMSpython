@@ -7,7 +7,6 @@ def load_gif(path):
     frames = ImageSequence.Iterator(Image.open(path))
     return [pygame.image.fromstring(frame.convert("RGBA").tobytes(), frame.size, "RGBA") for frame in frames]
 
-
 def load_asset(path):
     ext = os.path.splitext(path)[1]
     return {
@@ -15,7 +14,6 @@ def load_asset(path):
         '.wav': pygame.mixer.Sound,
         '.gif': load_gif,
     }[ext](path)
-
 
 def get_assets(assets_path):
     return dict(
