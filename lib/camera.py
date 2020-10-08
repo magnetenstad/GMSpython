@@ -9,14 +9,14 @@ class Camera(Object):
         self.y = 0
         self.width = display_size[0]
         self.height = display_size[1]
-        self.follow_instance = None
+        self.target = None
 
     def follow(self, instance):
-        self.follow_instance = instance
+        self.target = instance
 
     def step(self):
-        if not self.follow_instance is None:
-            target_x = self.follow_instance.rect.x - self.width / 2
-            target_y = self.follow_instance.rect.y - self.height / 2
+        if not self.target is None:
+            target_x = self.target.rect.x - self.width / 2
+            target_y = self.target.rect.y - self.height / 2
             self.x += (target_x - self.x) / 10
             self.y += (target_y - self.y) / 10

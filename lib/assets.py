@@ -2,7 +2,6 @@ import pygame
 import os
 from PIL import Image, ImageSequence
 
-
 def load_gif(path):
     frames = ImageSequence.Iterator(Image.open(path))
     return [pygame.image.fromstring(frame.convert("RGBA").tobytes(), frame.size, "RGBA") for frame in frames]
