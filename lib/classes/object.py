@@ -32,3 +32,4 @@ class Object():
     def destroy(self):
         game.objects.remove(self)
         del self
+        
