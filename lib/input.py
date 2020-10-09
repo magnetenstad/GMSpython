@@ -1,6 +1,5 @@
 import pygame
 
-from lib.game import game
 from lib.classes.object import Object
 
 class Input(Object):
@@ -23,3 +22,4 @@ class Input(Object):
 			if event.type == pygame.KEYUP:
 				self.key_released.add(event.key)
 				self.key.remove(event.key)
+			

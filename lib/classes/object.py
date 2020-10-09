@@ -14,7 +14,11 @@ class Object():
 		self.tags = set()
 		self.visible = True
 		game.objects.append(self)
+		self.create()
 
+	def create(self):
+		pass
+	
 	def tag_add(self, tag):
 		self.tags.add(tag)
 

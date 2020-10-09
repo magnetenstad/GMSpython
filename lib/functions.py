@@ -1,3 +1,4 @@
+import pygame
 from lib.game import game
 
 def instance_find_tag(tag):
@@ -48,3 +49,9 @@ def keyboard_check_pressed(key):
 
 def keyboard_check_released(key):
 	return key in game.input.key_released
+
+def mouse_x():
+	return pygame.mouse.get_pos()[0]
+
+def mouse_y():
+	return pygame.mouse.get_pos()[1]

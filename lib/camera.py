@@ -20,3 +20,4 @@ class Camera(Object):
 			target_y = self.target.rect.y - self.height / 2
 			self.x += (target_x - self.x) / 10
 			self.y += (target_y - self.y) / 10
+			
