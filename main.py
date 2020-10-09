@@ -4,12 +4,14 @@ from lib.functions import *
 from src.wall import Wall
 from src.player import Player
 from src.gui import Gui
+from lib.classes.emitter import Emitter
 
 def main():
     game.init()
 
     gui = Gui(0, 0)
     player = Player(100, 100)
+    emitter = Emitter(100, 100, Wall)
     game.camera.follow(player)
 
     for i in range(100):
