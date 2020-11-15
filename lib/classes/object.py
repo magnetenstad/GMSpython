@@ -17,7 +17,7 @@ class Object():
 		self.visible = True
 		game.objects.append(self)
 		self.create()
-
+	
 	def create(self):
 		pass
 	

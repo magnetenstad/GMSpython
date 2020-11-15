@@ -1,8 +1,8 @@
 import pygame
 
-from lib.classes.object import Object
+from lib.classes.singleton import Singleton
 
-class Input(Object):
+class Input(Singleton):
 	def __init__(self):
 		super().__init__(0, 0)
 		self.key = set()
@@ -21,5 +21,11 @@ class Input(Object):
 				self.key.add(event.key)
 			if event.type == pygame.KEYUP:
 				self.key_released.add(event.key)
-				self.key.remove(event.key)
-			
+				if event.key in self.key:
+					self.key.remove(event.key)
+	
+	def clear(self):
+		self.key.clear()
+		self.key_pressed.clear()
+		self.key_released.clear()
+	

@@ -1,6 +1,8 @@
 import pygame
 from lib.game import game
 
+# Instances
+
 def instance_find_tag(tag):
 	return [i for i in game.objects if tag in i.tags]
 
@@ -25,6 +27,8 @@ def instance_find(list, var, val):
 def rect_from_sprite(instance, sprite_index):
 	return game.application_surface.blit(game.assets[sprite_index][0], (instance.rect.x, instance.rect.y))
 
+# Draw
+
 def draw_text(string, x, y):
 	game.application_surface.blit(game.font.render(string, False, (255, 255, 255)),
 									(x - game.camera.x, y - game.camera.y))
@@ -45,6 +49,8 @@ def draw_text_gui(string, x, y):
 	game.application_surface.blit(game.font.render(
 		string, False, (255, 255, 255)), (x, y))
 
+# Keyboard
+
 def keyboard_check(key):
 	return key in game.input.key
 	
@@ -59,3 +65,15 @@ def mouse_x():
 
 def mouse_y():
 	return pygame.mouse.get_pos()[1]
+
+# Rooms
+
+def room_get(room_index):
+	return game.rooms[room_index]
+
+def room_goto(room_index):
+	game.input.clear()
+	room_get(game.room_index).objects = game.objects
+	room = room_get(room_index)
+	game.objects = room.objects
+	game.room_index = room_index

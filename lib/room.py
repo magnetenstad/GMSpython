@@ -1,12 +1,13 @@
 import pygame
 
-from lib.classes.object import Object
+from lib.game import game
 
-class Room(Object):
-	def __init__(self):
-		super().__init__(0, 0)
-		pass
+class Room():
+	def __init__(self, name, width, height):
+		self.name = name
+		self.width = width
+		self.height = height
+		self.objects = []
+		game.rooms[name] = self
 
-	def step(self):
-		pass
 	

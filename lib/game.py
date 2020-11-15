@@ -17,14 +17,20 @@ class Game():
 		self.objects = []
 		self.camera = None
 		self.solids = []
+		self.rooms = {}
+		self.room_index = ""
+		self.singletons = []
 
 	def init(self):
 		
 		from lib.camera import Camera
 		from lib.input import Input
+		from lib.room import Room
 
 		self.camera = Camera(self.display_size, 0, 0)
 		self.input = Input()
+		Room("rm_main", self.display_size[0], self.display_size[1])
+		self.room_index = "rm_main"
 
 	def run(self):
 		while True:
@@ -36,6 +42,9 @@ class Game():
 		self.application_surface.fill((0, 0, 0))
 
 		self.solids = [i for i in game.objects if 'solid' in i.tags]
+		
+		for i in self.singletons:
+			i.step()
 
 		for i in self.objects:
 			i.step()

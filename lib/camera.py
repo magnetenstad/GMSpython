@@ -1,8 +1,8 @@
-from lib.classes.object import Object
+from lib.classes.singleton import Singleton
 from lib.functions import instance_find_tag
 
 
-class Camera(Object):
+class Camera(Singleton):
 	def __init__(self, display_size, x, y):
 		super().__init__(x, y)
 		self.x = 0
