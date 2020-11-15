@@ -1,8 +1,8 @@
 import pygame
 
-from lib.classes.singleton import Singleton
+from lib.classes.persistant import Persistant
 
-class Input(Singleton):
+class Input(Persistant):
 	def __init__(self):
 		super().__init__(0, 0)
 		self.key = set()

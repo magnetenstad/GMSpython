@@ -19,7 +19,7 @@ class Game():
 		self.solids = []
 		self.rooms = {}
 		self.room_index = ""
-		self.singletons = []
+		self.persistants = []
 
 	def init(self):
 		
@@ -42,8 +42,8 @@ class Game():
 		self.application_surface.fill((0, 0, 0))
 
 		self.solids = [i for i in game.objects if 'solid' in i.tags]
-		
-		for i in self.singletons:
+
+		for i in self.persistants:
 			i.step()
 
 		for i in self.objects:

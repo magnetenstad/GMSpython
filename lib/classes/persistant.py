@@ -3,9 +3,9 @@ import pygame
 from lib.game import game
 from lib.functions import *
 
-class Singleton():
+class Persistant():
 	def __init__(self, x, y):
-		game.singletons.append(self)
+		game.persistant.append(self)
 		self.create()
 	
 	def create(self):
@@ -15,5 +15,5 @@ class Singleton():
 		pass
 	
 	def destroy(self):
-		game.singletons.remove(self)
+		game.persistant.remove(self)
 		del self
