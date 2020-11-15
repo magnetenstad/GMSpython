@@ -8,6 +8,8 @@ class Object():
 		self.sprite_index = None
 		self.image_index = 0
 		self.image_speed = 0
+		self.image_xscale = 1
+		self.image_yscale = 1
 		self.depth = 0
 		self.rect = pygame.Rect((x, y), (0, 0))
 		self.solid = False
@@ -38,4 +40,3 @@ class Object():
 	def destroy(self):
 		game.objects.remove(self)
 		del self
-		

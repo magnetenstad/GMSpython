@@ -11,7 +11,6 @@ def main():
 
 	gui = Gui(0, 0)
 	player = Player(100, 100)
-	emitter = Emitter(100, 100, Wall)
 	game.camera.follow(player)
 
 	for i in range(100):

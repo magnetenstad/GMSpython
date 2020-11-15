@@ -29,13 +29,17 @@ def draw_text(string, x, y):
 	game.application_surface.blit(game.font.render(string, False, (255, 255, 255)),
 									(x - game.camera.x, y - game.camera.y))
 
-def draw_sprite(sprite_index, image_index, x, y):
-	game.application_surface.blit(game.assets[sprite_index][int(image_index)],
-									(x - game.camera.x, y - game.camera.y))
+def draw_sprite(sprite_index, image_index, x, y, image_xscale=1, image_yscale=1):
+	image = game.assets[sprite_index][int(image_index)]
+	if image_xscale != 1 or image_yscale != 1:
+		size = image.get_rect().size
+		image = pygame.transform.flip(image, image_xscale < 0, image_yscale < 0)
+		image = pygame.transform.scale(image, (abs(image_xscale)*size[0], abs(image_yscale)*size[1]))
+	game.application_surface.blit(image, (x - game.camera.x, y - game.camera.y))
 
 def draw_instance(instance):
-	draw_sprite(instance.sprite_index,
-						instance.image_index, instance.rect.x, instance.rect.y)
+	draw_sprite(instance.sprite_index, instance.image_index,
+					instance.rect.x, instance.rect.y, instance.image_xscale, instance.image_yscale)
 
 def draw_text_gui(string, x, y):
 	game.application_surface.blit(game.font.render(

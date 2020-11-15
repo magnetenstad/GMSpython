@@ -25,3 +25,15 @@ class Player(Physical):
 		if keyboard_check_pressed(ord('s')):
 			for _ in range(10):
 				Particle(self.rect.x, self.rect.y, 600, random.randint(-10, 10), random.randint(-10, 10))
+		
+		if self.speed_x:
+			self.image_speed = 0.2
+		else:
+			self.image_speed = 0
+		
+		if self.speed_x > 0:
+			self.image_xscale = 1
+		if self.speed_x < 0:
+			self.image_xscale = -1
+
+			
