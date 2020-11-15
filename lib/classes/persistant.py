@@ -5,7 +5,7 @@ from lib.functions import *
 
 class Persistant():
 	def __init__(self, x, y):
-		game.persistant.append(self)
+		game.persistants.append(self)
 		self.create()
 	
 	def create(self):
@@ -15,5 +15,5 @@ class Persistant():
 		pass
 	
 	def destroy(self):
-		game.persistant.remove(self)
+		game.persistants.remove(self)
 		del self
