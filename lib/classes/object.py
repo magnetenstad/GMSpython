@@ -28,14 +28,15 @@ class Object():
 		self.tags.discard(tag)
 
 	def draw_self(self):
-		if self.sprite_index != None:
+		if self.sprite_index != None and game.camera.x - self.rect.width <= self.rect.x <= game.camera.x + game.camera.width and game.camera.y - self.rect.height <= self.rect.y <= game.camera.y + game.camera.y + game.camera.width:
 			draw_instance(self)
 
 	def step(self):
 		if self.sprite_index != None:
 			self.image_index += self.image_speed
 			self.image_index *= self.image_index < len(game.assets[self.sprite_index])
-		self.draw_self()
+		if self.visible:
+			self.draw_self()
 
 	def destroy(self):
 		game.objects.remove(self)

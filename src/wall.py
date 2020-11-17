@@ -8,3 +8,4 @@ class Wall(Solid):
 		self.collide = False
 		self.sprite_index = "wall.png"
 		self.rect = rect_from_sprite(self, "wall.png")
+		

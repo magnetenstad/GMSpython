@@ -22,10 +22,9 @@ class Game():
 		self.persistants = []
 
 	def init(self):
-		
-		from lib.camera import Camera
-		from lib.input import Input
-		from lib.room import Room
+		from lib.classes.camera import Camera
+		from lib.classes.input import Input
+		from lib.classes.room import Room
 
 		self.camera = Camera(self.display_size, 0, 0)
 		self.input = Input()

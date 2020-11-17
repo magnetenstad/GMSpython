@@ -1,4 +1,4 @@
-from lib import room
+from lib.classes import room
 import pygame
 import random
 
@@ -23,22 +23,10 @@ class Player(Physical):
 			self.speed_x += self.acceleration
 		if keyboard_check_pressed(ord('w')):
 			self.speed_y = self.speed_jump
-		if keyboard_check_pressed(ord('s')):
-			for _ in range(10):
-				Particle(self.rect.x, self.rect.y, 600, random.randint(-10, 10), random.randint(-10, 10))
-			if game.room_index == "rm_main":
-				room_goto("rm_other")
-			else:
-				room_goto("rm_main")
-			
-		if self.speed_x:
-			self.image_speed = 0.2
-		else:
-			self.image_speed = 0
-		
+
+		self.image_speed = 0.2 * (self.speed_x != 0)
+
 		if self.speed_x > 0:
 			self.image_xscale = 1
-		if self.speed_x < 0:
+		elif self.speed_x < 0:
 			self.image_xscale = -1
-
-			
